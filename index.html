@@ -10,25 +10,30 @@
 </head>
 <body>
   <img src="https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1GqO6xInZB9ciisfogpwS2AiCJqbc67dI" alt="Logo" class="logo">
-  <div id="mensaje" style="color: #000000; margin-bottom: 20px;"></div>
-  <p class="texto-negro">Elige tus producto y haz tus pedidos.</p>
-  <h2><i class="fas fa-shopping-cart"></i> Carrito (<span id="contadorCarrito">0</span>)</h2>
-  <button class="btn-ver-carrito" onclick="verCarrito()">Ver carrito</button>
 
-  <div class="producto" id="producto1">
-    <h3 data-nombre="Producto 1">Producto 1</h3>
-    <img src="" alt="Producto 1" class="imagen-principal" width="200" data-imagen="https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1dHC4JFWo6PfZluQvV4xZwlhuPNfHJ6Wh">
-    <p data-precio="120.00">Precio: <span class="texto-grande">Lps 120.00</span></p>
-    <button onclick="agregarACarrito(document.querySelector('#producto1 h3[data-nombre]').getAttribute('data-nombre'), parseFloat(document.querySelector('#producto1 p[data-precio]').getAttribute('data-precio')), document.querySelector('#producto1 img[data-imagen]').getAttribute('data-imagen'))">Agregar a carrito</button>
-    <button onclick="solicitarDatos(document.querySelector('#producto1 h3[data-nombre]').getAttribute('data-nombre'), parseFloat(document.querySelector('#producto1 p[data-precio]').getAttribute('data-precio')), document.querySelector('#producto1 img[data-imagen]').getAttribute('data-imagen'))">Comprar</button>
+  <div class="contenido-fijo">
+    <div id="mensaje" style="color: #000000; margin-bottom: 20px;"></div>
+    <p class="texto-negro">Elige tus producto y haz tus pedidos.</p>
+    <h2><i class="fas fa-shopping-cart"></i> Carrito (<span id="contadorCarrito">0</span>)</h2>
+    <button class="btn-ver-carrito" onclick="verCarrito()">Ver carrito</button>
   </div>
 
-  <div class="producto" id="producto2">
-    <h3 data-nombre="Producto 2">Producto 2</h3>
-    <img src="" alt="Producto 2" class="imagen-principal" width="200" data-imagen="https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1a25FTrgFzVpDPVKVM0n-ZfXyHTYlHniP">
-    <p data-precio="150.00">Precio: <span class="texto-grande">Lps 150.00</span></p>
-    <button onclick="agregarACarrito(document.querySelector('#producto2 h3[data-nombre]').getAttribute('data-nombre'), parseFloat(document.querySelector('#producto2 p[data-precio]').getAttribute('data-precio')), document.querySelector('#producto2 img[data-imagen]').getAttribute('data-imagen'))">Agregar a carrito</button>
-    <button onclick="solicitarDatos(document.querySelector('#producto2 h3[data-nombre]').getAttribute('data-nombre'), parseFloat(document.querySelector('#producto2 p[data-precio]').getAttribute('data-precio')), document.querySelector('#producto2 img[data-imagen]').getAttribute('data-imagen'))">Comprar</button>
+  <div class="productos-contenedor">
+    <div class="producto" id="producto1">
+      <h3 data-nombre="Producto 1">Producto 1</h3>
+      <img src="" alt="Producto 1" class="imagen-principal" width="200" data-imagen="https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1dHC4JFWo6PfZluQvV4xZwlhuPNfHJ6Wh">
+      <p data-precio="120.00">Precio: <span class="texto-grande">Lps 120.00</span></p>
+      <button onclick="agregarACarrito(document.querySelector('#producto1 h3[data-nombre]').getAttribute('data-nombre'), parseFloat(document.querySelector('#producto1 p[data-precio]').getAttribute('data-precio')), document.querySelector('#producto1 img[data-imagen]').getAttribute('data-imagen'))">Agregar a carrito</button>
+      <button onclick="solicitarDatos(document.querySelector('#producto1 h3[data-nombre]').getAttribute('data-nombre'), parseFloat(document.querySelector('#producto1 p[data-precio]').getAttribute('data-precio')), document.querySelector('#producto1 img[data-imagen]').getAttribute('data-imagen'))">Comprar</button>
+    </div>
+
+    <div class="producto" id="producto2">
+      <h3 data-nombre="Producto 2">Producto 2</h3>
+      <img src="" alt="Producto 2" class="imagen-principal" width="200" data-imagen="https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1a25FTrgFzVpDPVKVM0n-ZfXyHTYlHniP">
+      <p data-precio="150.00">Precio: <span class="texto-grande">Lps 150.00</span></p>
+      <button onclick="agregarACarrito(document.querySelector('#producto2 h3[data-nombre]').getAttribute('data-nombre'), parseFloat(document.querySelector('#producto2 p[data-precio]').getAttribute('data-precio')), document.querySelector('#producto2 img[data-imagen]').getAttribute('data-imagen'))">Agregar a carrito</button>
+      <button onclick="solicitarDatos(document.querySelector('#producto2 h3[data-nombre]').getAttribute('data-nombre'), parseFloat(document.querySelector('#producto2 p[data-precio]').getAttribute('data-precio')), document.querySelector('#producto2 img[data-imagen]').getAttribute('data-imagen'))">Comprar</button>
+    </div>
   </div>
 
   <div id="carritoModal" class="modal">
