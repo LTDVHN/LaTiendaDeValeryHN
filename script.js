@@ -132,10 +132,14 @@ function finalizarCompra(nombre, apellido) {
 
   Object.keys(conteo).forEach(producto => {
     const item = carrito.find(item => item.producto === producto);
+    
+    // Transformar el enlace de imagen al formato directo sin el prefijo https://
+    const imagenDirecta = item.imagen.replace("drive.google.com/thumbnail?authuser=0&sz=w640&id=", "drive.google.com/uc?export=view&id=").replace("https://", "");
+
     mensaje += `*Producto:* ${producto}\n`;
     mensaje += `*Cantidad:* ${conteo[producto]}\n`;
     mensaje += `*Precio:* Lps ${item.precio}\n`;
-    mensaje += `*Imagen:* ${item.imagen}\n\n`;
+    mensaje += `*Imagen:* ${imagenDirecta}\n\n`;
   });
 
   const total = carrito.reduce((sum, item) => sum + item.precio, 0);
@@ -165,3 +169,4 @@ document.querySelectorAll('.imagen-principal').forEach(item => {
     this.classList.toggle('ampliada');
   });
 });
+
