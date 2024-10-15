@@ -133,8 +133,11 @@ function finalizarCompra(nombre, apellido) {
   Object.keys(conteo).forEach(producto => {
     const item = carrito.find(item => item.producto === producto);
     
-    // Transformar el enlace de imagen al formato directo sin el prefijo https://
-    const imagenDirecta = item.imagen.replace("drive.google.com/thumbnail?authuser=0&sz=w640&id=", "drive.google.com/uc?export=view&id=").replace("https://", "");
+    // Obtener el ID de la imagen desde la URL original
+    const imagenID = item.imagen.split("id=")[1]; // Esto obtiene el ID después de 'id='
+    
+    // Crear el enlace utilizando el ID en el formato deseado
+    const imagenDirecta = `https://drive.google.com/file/d/${imagenID}`;
 
     mensaje += `*Producto:* ${producto}\n`;
     mensaje += `*Cantidad:* ${conteo[producto]}\n`;
@@ -169,4 +172,3 @@ document.querySelectorAll('.imagen-principal').forEach(item => {
     this.classList.toggle('ampliada');
   });
 });
-
