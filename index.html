@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Página Web</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Enlace al archivo CSS -->
+</head>
+<body>
+  
+  <img src="https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1GqO6xInZB9ciisfogpwS2AiCJqbc67dI" alt="Logo" class="logo"> <!-- Agrega el logo aquí -->
+
+  <div id="mensaje" style="color: green; margin-bottom: 20px;"></div> <!-- Mensaje dinámico -->
+  
+  <p>Elige tus producto y haz tus pedidos.</p>
+
+  <h2>Carrito (<span id="contadorCarrito">0</span>)</h2> <!-- Contador de carrito -->
+  
+  <button onclick="verCarrito()">Ver carrito</button> <!-- Botón para ver el carrito -->
+
+  <h2>Productos</h2>
+  
+  <div class="producto">
+    <h3>Producto 1</h3>
+    <img src="https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1dHC4JFWo6PfZluQvV4xZwlhuPNfHJ6Wh" alt="Producto 1" class="imagen-principal" width="200">
+    <p>Precio: Lps 120.00</p> <!-- Precio del Producto 1 -->
+    <button onclick="agregarACarrito('Producto 1', 10, 'https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1dHC4JFWo6PfZluQvV4xZwlhuPNfHJ6Wh')">Agregar a carrito</button>
+    <button onclick="comprar('Producto 1')">Comprar</button>
+  </div>
+
+  <!-- Modal para mostrar el carrito -->
+  <div id="carritoModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h3>Contenido del carrito:</h3>
+      <div id="contenidoCarritoModal"></div> <!-- Área para mostrar el carrito -->
+      <p id="totalCompra"></p> <!-- Total de la compra -->
+      <button class="btn-comprar" onclick="finalizarCompra()">Comprar</button> <!-- Botón para comprar todo -->
+    </div>
+  </div>
+
+  <script src="script.js"></script> <!-- Enlace al archivo JavaScript -->
+</body>
+</html>
