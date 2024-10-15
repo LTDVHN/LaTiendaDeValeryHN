@@ -4,41 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Página Web</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Enlace al archivo CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Alice&display=swap" rel="stylesheet">
 </head>
 <body>
-  
-  <img src="https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1GqO6xInZB9ciisfogpwS2AiCJqbc67dI" alt="Logo" class="logo"> <!-- Agrega el logo aquí -->
+  <img src="https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1GqO6xInZB9ciisfogpwS2AiCJqbc67dI" alt="Logo" class="logo">
+  <div id="mensaje" style="color: #000000; margin-bottom: 20px;"></div>
+  <p class="texto-negro">Elige tus producto y haz tus pedidos.</p>
+  <h2><i class="fas fa-shopping-cart"></i> Carrito (<span id="contadorCarrito">0</span>)</h2>
+  <button class="btn-ver-carrito" onclick="verCarrito()">Ver carrito</button>
 
-  <div id="mensaje" style="color: green; margin-bottom: 20px;"></div> <!-- Mensaje dinámico -->
-  
-  <p>Elige tus producto y haz tus pedidos.</p>
-
-  <h2>Carrito (<span id="contadorCarrito">0</span>)</h2> <!-- Contador de carrito -->
-  
-  <button onclick="verCarrito()">Ver carrito</button> <!-- Botón para ver el carrito -->
-
-  <h2>Productos</h2>
-  
   <div class="producto">
-    <h3>Producto 1</h3>
-    <img src="https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1dHC4JFWo6PfZluQvV4xZwlhuPNfHJ6Wh" alt="Producto 1" class="imagen-principal" width="200">
-    <p>Precio: Lps 120.00</p> <!-- Precio del Producto 1 -->
-    <button onclick="agregarACarrito('Producto 1', 10, 'https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1dHC4JFWo6PfZluQvV4xZwlhuPNfHJ6Wh')">Agregar a carrito</button>
-    <button onclick="comprar('Producto 1')">Comprar</button>
+    <h3 data-nombre="Producto 1">Producto 1</h3>
+    <img src="" alt="Producto 1" class="imagen-principal" width="200" data-imagen="https://drive.google.com/thumbnail?authuser=0&sz=w640&id=1dHC4JFWo6PfZluQvV4xZwlhuPNfHJ6Wh">
+    <p data-precio="120.00">Precio: <span class="texto-grande">Lps 120.00</span></p>
+    <button onclick="agregarACarrito(document.querySelector('.producto h3[data-nombre]').getAttribute('data-nombre'), parseFloat(document.querySelector('.producto p[data-precio]').getAttribute('data-precio')), document.querySelector('.producto img[data-imagen]').getAttribute('data-imagen'))">Agregar a carrito</button>
+    <button onclick="solicitarDatos(document.querySelector('.producto h3[data-nombre]').getAttribute('data-nombre'), parseFloat(document.querySelector('.producto p[data-precio]').getAttribute('data-precio')), document.querySelector('.producto img[data-imagen]').getAttribute('data-imagen'))">Comprar</button>
   </div>
 
-  <!-- Modal para mostrar el carrito -->
   <div id="carritoModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="cerrarModal()">&times;</span>
       <h3>Contenido del carrito:</h3>
-      <div id="contenidoCarritoModal"></div> <!-- Área para mostrar el carrito -->
-      <p id="totalCompra"></p> <!-- Total de la compra -->
-      <button class="btn-comprar" onclick="finalizarCompra()">Comprar</button> <!-- Botón para comprar todo -->
+      <div id="contenidoCarritoModal"></div>
+      <p id="totalCompra"></p>
+      <button class="btn-comprar" onclick="solicitarDatosCarrito()">Comprar</button>
     </div>
   </div>
 
-  <script src="script.js"></script> <!-- Enlace al archivo JavaScript -->
+  <div id="datosModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModalDatos()">&times;</span>
+      <h3>Ingrese sus datos para continuar</h3>
+      <input type="text" id="nombre" placeholder="Nombre" required oninput="capitalizarInput(this)">
+      <input type="text" id="apellido" placeholder="Apellido" required oninput="capitalizarInput(this)">
+      <button onclick="enviarDatos()">Enviar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
