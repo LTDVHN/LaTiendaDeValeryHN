@@ -58,7 +58,7 @@ button:hover {
   margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 55%;
+  width: 80%;
   border-radius: 20px;
 }
 
@@ -115,7 +115,7 @@ button:hover {
 .logo {
   width: 300px;
   height: auto;
-  margin: 250px auto 40px; /* Ajusta el tercer valor para el margen inferior */
+  margin: 200px auto 5px; /* Ajusta el tercer valor para el margen inferior */
   display: block;
 }
 
@@ -149,27 +149,17 @@ body {
   font-size: 1.2em;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
 .contenido-fijo {
   position: fixed;
   top: 0;
-  width: 98%;
+  width: 100%;
   background-color: white;
   padding: 20px;
   z-index: 1000;
   background-color: #f8f9fa;
   background: linear-gradient(90deg, #5170ff, #ff66c4);
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  left: 50%; /* Centra el elemento horizontalmente */
-  transform: translateX(-50%); /* Ajusta la posición horizontal */
 }
 
 .productos-contenedor {
   margin-top: 20px;
 }
-
