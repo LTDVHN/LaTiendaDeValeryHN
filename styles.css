@@ -37,6 +37,7 @@ button:hover {
   height: auto;
   margin-right: 10px;
   transition: width 0.9s;
+  border-radius: 20px; /* Agrega esto */
 }
 
 .modal {
@@ -86,6 +87,7 @@ button:hover {
   width: 80px;
   height: auto;
   margin-right: 10px;
+  border-radius: 20px; /* Agrega esto para redondear las esquinas */
 }
 
 .btn-eliminar {
@@ -166,4 +168,9 @@ body {
 
 .productos-contenedor {
   margin-top: 20px;
+}
+
+.whatsapp-icon {
+  font-size: 24px; /* Ajusta este valor para cambiar el tamaño del ícono */
+  color: #000000;
 }
