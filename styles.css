@@ -152,12 +152,16 @@ body {
 .contenido-fijo {
   position: fixed;
   top: 0;
-  width: 100%;
-  background-color: white;
+  left: 0;
+  right: 0;
+  width: calc(100% - 40px); /* Deja espacio para el margen en ambos lados */
+  margin: 0 20px; /* 20px de margen en ambos lados (izquierdo y derecho) */
   padding: 20px;
   z-index: 1000;
-  background-color: #f8f9fa;
+  background-color: white;
   background: linear-gradient(90deg, #5170ff, #ff66c4);
+  border-radius: 0 0 20px 20px; /* Redondea solo los bordes inferiores */
+  box-sizing: border-box; /* Asegura que padding y bordes estén dentro del ancho */
 }
 
 .productos-contenedor {
