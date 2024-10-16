@@ -117,7 +117,7 @@ button:hover {
 .logo {
   width: 300px;
   height: auto;
-  margin: 200px auto 5px; /* Ajusta el tercer valor para el margen inferior */
+  margin: 230px auto 5px; /* Ajusta el tercer valor para el margen inferior */
   display: block;
 }
 
