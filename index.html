@@ -16,6 +16,37 @@
     <p class="texto-negro"><i class="fab fa-whatsapp whatsapp-icon"></i> Elige tus productos y haz tus pedidos.</p>
     <h2><i class="fas fa-shopping-cart"></i> Carrito (<span id="contadorCarrito">0</span>)</h2>
     <button class="btn-ver-carrito" onclick="verCarrito()">Ver carrito</button>
+    
+    <!-- Búsqueda y Filtros dentro del header -->
+    <div class="busqueda-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="busquedaInput" placeholder="Buscar productos..." onkeyup="filtrarProductos()">
+      <button class="btn-limpiar-busqueda" onclick="limpiarBusqueda()" title="Limpiar búsqueda">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="categorias-container">
+      <button class="btn-categoria active" onclick="filtrarPorCategoria('Todas')">
+        <i class="fas fa-th"></i> Todas
+      </button>
+      <div id="categoriasdinamicas"></div>
+    </div>
+
+    <div class="ordenamiento-container">
+      <label for="ordenSelect"><i class="fas fa-sort"></i> Ordenar por:</label>
+      <select id="ordenSelect" onchange="ordenarProductos()">
+        <option value="recientes">Más recientes</option>
+        <option value="nombre-asc">Nombre (A-Z)</option>
+        <option value="nombre-desc">Nombre (Z-A)</option>
+        <option value="precio-asc">Precio: Menor a Mayor</option>
+        <option value="precio-desc">Precio: Mayor a Menor</option>
+      </select>
+    </div>
+
+    <div class="resultados-info">
+      <span id="contadorResultados">Mostrando 0 productos</span>
+    </div>
   </div>
 
   <button class="btn-admin" onclick="toggleAdmin()" title="Panel de Administración">
@@ -71,6 +102,13 @@
       <div class="form-group">
         <label>Precio (Lps):</label>
         <input type="number" id="adminPrecio" placeholder="Ej: 120.00" step="0.01">
+      </div>
+
+      <!-- NUEVO: Campo de categoría -->
+      <div class="form-group">
+        <label>Categoría:</label>
+        <input type="text" id="adminCategoria" placeholder="Ej: Zapatos, Ropa, Accesorios" list="categoriasExistentes">
+        <datalist id="categoriasExistentes"></datalist>
       </div>
       
       <div class="form-group">
