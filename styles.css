@@ -784,9 +784,36 @@ input[type="password"]:focus {
   .contenido-fijo {
     position: relative;
     width: 100%;
-    margin: 0 0 20px 0;
-    padding: 15px;
+    margin: 0 0 15px 0;
+    padding: 10px;
     border-radius: 20px;
+  }
+
+  .contenido-fijo h2 {
+    margin: 5px 0;
+    font-size: 1.1em;
+  }
+
+  .contenido-fijo p {
+    margin: 5px 0;
+  }
+
+  .btn-ver-carrito {
+    margin-bottom: 10px;
+    padding: 8px 15px;
+  }
+
+  .busqueda-box {
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  .categorias-container {
+    margin-bottom: 8px;
+  }
+
+  .ordenamiento-container {
+    margin-bottom: 8px;
   }
 
   .resultados-info {
