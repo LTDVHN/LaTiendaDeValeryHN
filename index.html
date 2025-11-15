@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Página Web</title>
+  <title>La Tienda De Valery</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Alice&display=swap" rel="stylesheet">
@@ -101,18 +101,18 @@
       
       <div class="form-group">
         <label>Nombre del Producto:</label>
-        <input type="text" id="adminNombre" placeholder="Ej: Zapatos deportivos">
+        <input type="text" id="adminNombre" placeholder="Ej: Zapatos deportivos" oninput="capitalizarTexto(this)">
       </div>
       
       <div class="form-group">
         <label>Precio (Lps):</label>
-        <input type="number" id="adminPrecio" placeholder="Ej: 120.00" step="0.01">
+        <input type="text" id="adminPrecio" placeholder="Ej: 120.00" oninput="formatearPrecioInput(this)">
       </div>
 
       <!-- NUEVO: Campo de categoría -->
       <div class="form-group">
         <label>Categoría:</label>
-        <input type="text" id="adminCategoria" placeholder="Ej: Zapatos, Ropa, Accesorios" list="categoriasExistentes">
+        <input type="text" id="adminCategoria" placeholder="Ej: Zapatos, Ropa, Accesorios" list="categoriasExistentes" oninput="capitalizarTexto(this)">
         <datalist id="categoriasExistentes"></datalist>
       </div>
       
