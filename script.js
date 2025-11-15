@@ -334,17 +334,19 @@ async function agregarProducto() {
   }
 
   const nombre = document.getElementById('adminNombre').value.trim();
-  const precio = parseFloat(document.getElementById('adminPrecio').value);
+  const precioInput = document.getElementById('adminPrecio');
+  const precioValor = precioInput.getAttribute('data-valor') || precioInput.value.replace(/,/g, '');
+  const precio = parseFloat(precioValor);
   const imagen = document.getElementById('adminImagen').value.trim();
-  const categoria = document.getElementById('adminCategoria').value.trim() || 'Sin categoría';
+  const categoria = document.getElementById('adminCategoria').value.trim() || 'Sin Categoría';
 
   if (!nombre || !precio || !imagen) {
     alert('Por favor completa todos los campos obligatorios');
     return;
   }
 
-  if (precio <= 0) {
-    alert('El precio debe ser mayor a 0');
+  if (precio <= 0 || isNaN(precio)) {
+    alert('El precio debe ser un número mayor a 0');
     return;
   }
 
@@ -394,7 +396,12 @@ function editarProducto(id) {
   const producto = productos.find(p => p.id === id);
   if (producto) {
     document.getElementById('adminNombre').value = producto.nombre;
-    document.getElementById('adminPrecio').value = producto.precio;
+    
+    // Formatear precio para mostrar
+    const precioInput = document.getElementById('adminPrecio');
+    precioInput.value = formatearPrecio(producto.precio);
+    precioInput.setAttribute('data-valor', producto.precio.toString());
+    
     document.getElementById('adminImagen').value = producto.imagen;
     document.getElementById('adminCategoria').value = producto.categoria;
     document.getElementById('imagenPreview').src = producto.imagen;
@@ -461,6 +468,65 @@ function capitalizar(texto) {
 
 function capitalizarInput(input) {
   input.value = capitalizar(input.value);
+}
+
+// Nueva función para capitalizar cada palabra en tiempo real
+function capitalizarTexto(input) {
+  const cursorPos = input.selectionStart; // Guardar posición del cursor
+  let texto = input.value;
+  
+  // Capitalizar cada palabra
+  const palabras = texto.split(' ');
+  const textoCapitalizado = palabras.map(palabra => {
+    if (palabra.length === 0) return '';
+    return palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();
+  }).join(' ');
+  
+  input.value = textoCapitalizado;
+  
+  // Restaurar posición del cursor
+  input.setSelectionRange(cursorPos, cursorPos);
+}
+
+// Función para formatear precio en tiempo real
+function formatearPrecioInput(input) {
+  const cursorPos = input.selectionStart;
+  
+  // Remover todo excepto números y punto
+  let valor = input.value.replace(/[^\d.]/g, '');
+  
+  // Asegurar solo un punto decimal
+  const partes = valor.split('.');
+  if (partes.length > 2) {
+    valor = partes[0] + '.' + partes.slice(1).join('');
+  }
+  
+  // Limitar a 2 decimales
+  if (partes[1] && partes[1].length > 2) {
+    valor = partes[0] + '.' + partes[1].substring(0, 2);
+  }
+  
+  // Guardar el valor numérico limpio
+  input.setAttribute('data-valor', valor);
+  
+  // Si hay un valor numérico, formatearlo
+  if (valor) {
+    const [entero, decimal] = valor.split('.');
+    
+    // Formatear parte entera con comas
+    const enteroFormateado = parseInt(entero || 0).toLocaleString('en-US');
+    
+    // Construir el valor formateado
+    if (decimal !== undefined) {
+      input.value = enteroFormateado + '.' + decimal;
+    } else if (valor.endsWith('.')) {
+      input.value = enteroFormateado + '.';
+    } else {
+      input.value = enteroFormateado;
+    }
+  } else {
+    input.value = '';
+  }
 }
 
 function enviarDatos() {
