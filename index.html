@@ -26,13 +26,6 @@
       </button>
     </div>
 
-    <div class="categorias-container">
-      <button class="btn-categoria active" onclick="filtrarPorCategoria('Todas')">
-        <i class="fas fa-th"></i> Todas
-      </button>
-      <div id="categoriasdinamicas"></div>
-    </div>
-
     <div class="ordenamiento-container">
       <label for="ordenSelect"><i class="fas fa-sort"></i> Ordenar por:</label>
       <select id="ordenSelect" onchange="ordenarProductos()">
@@ -46,6 +39,13 @@
 
     <div class="resultados-info">
       <span id="contadorResultados">Mostrando 0 productos</span>
+    </div>
+
+    <div class="categorias-container">
+      <button class="btn-categoria active" onclick="filtrarPorCategoria('Todas')">
+        <i class="fas fa-th"></i> Todas
+      </button>
+      <div id="categoriasdinamicas"></div>
     </div>
   </div>
 
