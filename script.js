@@ -2,7 +2,7 @@
 // VARIABLES GLOBALES
 // ========================================
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwcipMAUS7L88gMZ5YfJ3UPXagn38IyAhd71W4qLWvcMZ8_-i5qp3P_y3TcjvKBQmvf/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwkANxAj2pi56YEslDer0mP2AUx5RkB4u2FohvFl8KSSaqEeEJztddZ6tmJc2eTt2IR/exec';
 
 let contador = 0;
 let carrito = [];
@@ -803,3 +803,4 @@ window.onclick = function(event) {
     cerrarModalImagenes();
   }
 }
+
