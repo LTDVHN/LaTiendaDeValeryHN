@@ -1,26 +1,4 @@
-.btn-ver-carrito {
-  margin-bottom: 20px;
-}
-
-.texto-grande {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #333;
-}
-
-.contenido-fijo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: calc(100% - 40px);
-  margin: 0 20px;
-  padding: 15px 20px;
-  z-index: 1000;
-  background: linear-gradient(90deg, #5170ff, #ff66c4);
-  border-radius: 0 0 20px 20px;
-  box-sizing: border-box;
-}body {
+body {
   font-family: 'Alice', serif;
   background: linear-gradient(90deg, #5170ff, #ff66c4);
   margin: 0;
@@ -172,7 +150,7 @@ button:active {
 
 .busqueda-box input {
   width: 100%;
-  padding: 12px 50px 12px 15px;
+  padding: 10px 50px 10px 15px;
   text-indent: 30px;
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 15px;
@@ -181,6 +159,7 @@ button:active {
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.9);
   color: #000;
+  height: 46px;
 }
 
 .busqueda-box input:focus {
@@ -275,15 +254,17 @@ button:active {
 
 #ordenSelect {
   flex: 1;
-  min-width: 200px;
+  width: 100%;
   padding: 10px 15px;
   border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
+  border-radius: 15px;
   font-size: 15px;
   background: rgba(255, 255, 255, 0.9);
   color: #000;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-sizing: border-box;
+  height: 46px;
 }
 
 #ordenSelect:focus {
@@ -477,6 +458,30 @@ input[type="password"]:focus {
   display: flex;
   align-items: center;
   margin: 10px 0;
+}
+
+.btn-ver-carrito {
+  margin-bottom: 20px;
+}
+
+.texto-grande {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
+
+.contenido-fijo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: calc(100% - 40px);
+  margin: 0 20px;
+  padding: 15px 20px;
+  z-index: 1000;
+  background: linear-gradient(90deg, #5170ff, #ff66c4);
+  border-radius: 0 0 20px 20px;
+  box-sizing: border-box;
 }
 
 .whatsapp-icon {
