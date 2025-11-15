@@ -231,7 +231,7 @@ function mostrarProductos() {
       ${botonesAdmin}
       <span class="badge-categoria">${producto.categoria}</span>
       <h3>${producto.nombre}</h3>
-      <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-principal" onclick="this.classList.toggle('ampliada')">
+      <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-principal" onclick="ampliarImagen(this)">
       <p>Precio: <span class="texto-grande">Lps ${producto.precio.toFixed(2)}</span></p>
       <button onclick="agregarACarrito('${escaparComillas(producto.nombre)}', ${producto.precio}, '${escaparComillas(producto.imagen)}')">
         <i class="fas fa-cart-plus"></i> Agregar a carrito
@@ -246,6 +246,22 @@ function mostrarProductos() {
 
 function escaparComillas(texto) {
   return texto.replace(/'/g, "\\'").replace(/"/g, '\\"');
+}
+
+// ========================================
+// AMPLIAR IMAGEN (SOLO UNA A LA VEZ)
+// ========================================
+
+function ampliarImagen(img) {
+  // Primero, quitar la clase 'ampliada' de TODAS las imágenes
+  document.querySelectorAll('.imagen-principal').forEach(imagen => {
+    if (imagen !== img) {
+      imagen.classList.remove('ampliada');
+    }
+  });
+  
+  // Luego, alternar la clase en la imagen clickeada
+  img.classList.toggle('ampliada');
 }
 
 // ========================================
@@ -402,6 +418,7 @@ function agregarACarrito(producto, precio, imagen) {
   carrito.push({ producto, precio, imagen });
   contador++;
   document.getElementById('contadorCarrito').innerText = contador;
+  document.getElementById('badgeCarrito').innerText = contador;
   document.getElementById('mensaje').innerText = producto + " ha sido agregado al carrito.";
 }
 
@@ -454,29 +471,91 @@ function verCarrito() {
     contenidoCarritoModal.innerHTML = "<p>No hay productos en el carrito.</p>";
     document.getElementById('totalCompra').innerText = "";
   } else {
+    // Agrupar productos por nombre
+    const productosAgrupados = {};
+    
     carrito.forEach((item, index) => {
+      if (!productosAgrupados[item.producto]) {
+        productosAgrupados[item.producto] = {
+          producto: item.producto,
+          precio: item.precio,
+          imagen: item.imagen,
+          cantidad: 1,
+          indices: [index]
+        };
+      } else {
+        productosAgrupados[item.producto].cantidad++;
+        productosAgrupados[item.producto].indices.push(index);
+      }
+    });
+    
+    // Mostrar productos agrupados
+    Object.values(productosAgrupados).forEach(item => {
+      const subtotal = item.precio * item.cantidad;
+      total += subtotal;
+      
       contenidoCarritoModal.innerHTML += `
         <div class="producto-modal">
           <img src="${item.imagen}" alt="${item.producto}" class="img-modal">
-          <div>
+          <div class="producto-modal-info">
             <p><strong>${item.producto}</strong></p>
-            <p>Precio: Lps ${item.precio.toFixed(2)}</p>
-            <button class="btn-eliminar" onclick="eliminarProducto(${index})">Eliminar</button>
+            <p>Precio unitario: Lps ${item.precio.toFixed(2)}</p>
+            <p><strong>Cantidad: ${item.cantidad}</strong></p>
+            <p><strong>Subtotal: Lps ${subtotal.toFixed(2)}</strong></p>
+            <div class="botones-cantidad">
+              <button class="btn-cantidad" onclick="cambiarCantidad('${escaparComillas(item.producto)}', -1)">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button class="btn-eliminar" onclick="eliminarProductoCompleto('${escaparComillas(item.producto)}')">
+                <i class="fas fa-trash"></i> Eliminar todo
+              </button>
+              <button class="btn-cantidad" onclick="cambiarCantidad('${escaparComillas(item.producto)}', 1)">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
           </div>
         </div>
       `;
-      total += item.precio;
     });
+    
     document.getElementById('totalCompra').innerText = "Total: Lps " + total.toFixed(2);
   }
 
   document.getElementById('carritoModal').style.display = "block";
 }
 
-function eliminarProducto(index) {
-  carrito.splice(index, 1);
-  contador--;
+function cambiarCantidad(producto, cambio) {
+  // Encontrar el índice del producto en el carrito
+  const index = carrito.findIndex(item => item.producto === producto);
+  
+  if (index === -1) return;
+  
+  if (cambio > 0) {
+    // Agregar una unidad más
+    const item = carrito[index];
+    carrito.push({ producto: item.producto, precio: item.precio, imagen: item.imagen });
+    contador++;
+  } else if (cambio < 0) {
+    // Quitar una unidad
+    carrito.splice(index, 1);
+    contador--;
+  }
+  
   document.getElementById('contadorCarrito').innerText = contador;
+  document.getElementById('badgeCarrito').innerText = contador;
+  verCarrito();
+}
+
+function eliminarProductoCompleto(producto) {
+  // Contar cuántos hay
+  const cantidad = carrito.filter(item => item.producto === producto).length;
+  
+  // Eliminar todos los productos con ese nombre
+  carrito = carrito.filter(item => item.producto !== producto);
+  
+  contador -= cantidad;
+  document.getElementById('contadorCarrito').innerText = contador;
+  document.getElementById('badgeCarrito').innerText = contador;
   verCarrito();
   document.getElementById('mensaje').innerText = "Producto eliminado del carrito.";
 }
