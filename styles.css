@@ -776,18 +776,25 @@ input[type="password"]:focus {
 
   .logo {
     width: 60px;
-    top: 10px;
+    position: absolute;
+    top: 15px;
     right: 15px;
   }
 
   .contenido-fijo {
-    width: calc(100% - 20px);
-    margin: 0 10px;
-    padding: 12px 15px;
+    position: relative;
+    width: 100%;
+    margin: 0 0 20px 0;
+    padding: 15px;
+    border-radius: 20px;
+  }
+
+  .resultados-info {
+    display: none;
   }
 
   .productos-contenedor {
-    margin-top: 440px;
+    margin-top: 0;
     grid-template-columns: 1fr;
     gap: 15px;
   }
@@ -798,6 +805,8 @@ input[type="password"]:focus {
 
   .producto img {
     height: 200px;
+    object-fit: contain;
+    background: white;
   }
 
   .btn-editar-producto {
