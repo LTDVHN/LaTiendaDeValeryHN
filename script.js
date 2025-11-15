@@ -581,11 +581,26 @@ function mostrarImagenes(images) {
     
     const badgeHtml = estaEnUso ? '<span class="badge-used">✓ En uso</span>' : '';
     
-    card.innerHTML = `
-      ${badgeHtml}
-      <img src="${img.thumbnail}" alt="${img.name}" onerror="this.src='${img.url}'">
-      <p>${img.name}</p>
-    `;
+    // Crear elementos separados para manejar el error de carga
+    const imgElement = document.createElement('img');
+    imgElement.src = img.thumbnail;
+    imgElement.alt = img.name;
+    imgElement.onerror = function() {
+      this.src = img.url;
+    };
+    
+    const nameElement = document.createElement('p');
+    nameElement.textContent = img.name;
+    
+    if (badgeHtml) {
+      const badge = document.createElement('span');
+      badge.className = 'badge-used';
+      badge.textContent = '✓ En uso';
+      card.appendChild(badge);
+    }
+    
+    card.appendChild(imgElement);
+    card.appendChild(nameElement);
     
     grid.appendChild(card);
   });
