@@ -229,15 +229,15 @@ function mostrarProductos() {
     
     div.innerHTML = `
       ${botonesAdmin}
-      <span class="badge-categoria">${producto.categoria}</span>
+      <span class="badge-categoria"><i class="fas fa-tag"></i> ${producto.categoria}</span>
       <h3>${producto.nombre}</h3>
       <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-principal" onclick="ampliarImagen(this)">
-      <p>Precio: <span class="texto-grande">Lps ${producto.precio.toFixed(2)}</span></p>
+      <p>Precio: <span class="texto-grande">Lps ${formatearPrecio(producto.precio)}</span></p>
       <button onclick="agregarACarrito('${escaparComillas(producto.nombre)}', ${producto.precio}, '${escaparComillas(producto.imagen)}')">
         <i class="fas fa-cart-plus"></i> Agregar a carrito
       </button>
       <button onclick="solicitarDatos('${escaparComillas(producto.nombre)}', ${producto.precio}, '${escaparComillas(producto.imagen)}')">
-        <i class="fas fa-shopping-bag"></i> Comprar
+        <i class="fas fa-shopping-bag"></i> Solicitar pedido
       </button>
     `;
     contenedor.appendChild(div);
@@ -246,6 +246,19 @@ function mostrarProductos() {
 
 function escaparComillas(texto) {
   return texto.replace(/'/g, "\\'").replace(/"/g, '\\"');
+}
+
+// Función para formatear precios con comas (para mostrar en pantalla)
+function formatearPrecio(precio) {
+  return precio.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+// Función para formatear precios sin comas (para WhatsApp)
+function formatearPrecioWhatsApp(precio) {
+  return precio.toFixed(2);
 }
 
 // ========================================
@@ -499,18 +512,20 @@ function verCarrito() {
           <img src="${item.imagen}" alt="${item.producto}" class="img-modal">
           <div class="producto-modal-info">
             <p><strong>${item.producto}</strong></p>
-            <p>Precio unitario: Lps ${item.precio.toFixed(2)}</p>
+            <p>Precio unitario: Lps ${formatearPrecio(item.precio)}</p>
             <p><strong>Cantidad: ${item.cantidad}</strong></p>
-            <p><strong>Subtotal: Lps ${subtotal.toFixed(2)}</strong></p>
-            <div class="botones-cantidad">
-              <button class="btn-cantidad" onclick="cambiarCantidad('${escaparComillas(item.producto)}', -1)">
-                <i class="fas fa-minus"></i>
-              </button>
-              <button class="btn-eliminar" onclick="eliminarProductoCompleto('${escaparComillas(item.producto)}')">
+            <p><strong>Subtotal: Lps ${formatearPrecio(subtotal)}</strong></p>
+            <div class="botones-cantidad-grupo">
+              <div class="botones-mas-menos">
+                <button class="btn-cantidad" onclick="cambiarCantidad('${escaparComillas(item.producto)}', -1)">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button class="btn-cantidad" onclick="cambiarCantidad('${escaparComillas(item.producto)}', 1)">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <button class="btn-eliminar-todo" onclick="eliminarProductoCompleto('${escaparComillas(item.producto)}')">
                 <i class="fas fa-trash"></i> Eliminar todo
-              </button>
-              <button class="btn-cantidad" onclick="cambiarCantidad('${escaparComillas(item.producto)}', 1)">
-                <i class="fas fa-plus"></i>
               </button>
             </div>
           </div>
@@ -518,7 +533,7 @@ function verCarrito() {
       `;
     });
     
-    document.getElementById('totalCompra').innerText = "Total: Lps " + total.toFixed(2);
+    document.getElementById('totalCompra').innerText = "Total: Lps " + formatearPrecio(total);
   }
 
   document.getElementById('carritoModal').style.display = "block";
@@ -583,12 +598,12 @@ function finalizarCompra(nombre, apellido) {
     
     mensaje += `*Producto:* ${producto}\n`;
     mensaje += `*Cantidad:* ${conteo[producto]}\n`;
-    mensaje += `*Precio:* Lps ${item.precio.toFixed(2)}\n`;
+    mensaje += `*Precio:* Lps ${formatearPrecio(item.precio)}\n`;
     mensaje += `*Imagen:* ${item.imagen}\n\n`;
   });
 
   const total = carrito.reduce((sum, item) => sum + item.precio, 0);
-  mensaje += `*Total:* Lps ${total.toFixed(2)}`;
+  mensaje += `*Total:* Lps ${formatearPrecio(total)}`;
 
   const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, '_blank');
